@@ -18,7 +18,7 @@
 #include "ScenePrivate.h"
 
 #include <list>
-
+#include "assimp/cimport.h"
 // ------------------------------------------------------------------------------------------------
 #ifndef ASSIMP_BUILD_SINGLETHREADED
 #   include <thread>
@@ -542,11 +542,11 @@ ASSIMP_API const char* aiAnimation_GetName(aiAnimation* ptrAnimation)
 
 ASSIMP_API float aiAnimation_GetDuraction(aiAnimation* ptrAnimation)
 {
-    return ptrAnimation->mDuration;
+    return (float)ptrAnimation->mDuration;
 }
 ASSIMP_API float aiAnimation_GetTicksPerSecond(aiAnimation* ptrAnimation)
 {
-    return ptrAnimation->mTicksPerSecond;
+    return (float)ptrAnimation->mTicksPerSecond;
 }
 ASSIMP_API uint aiAnimation_GetNumChannels(aiAnimation* ptrAnimation)
 {
@@ -619,7 +619,7 @@ ASSIMP_API void* aiNodeAnim_GetScalingKey(aiNodeAnim* ptrAnimation, uint uintInd
 
 ASSIMP_API float aiMeshMorphKey_GetTime(aiMeshMorphKey* ptrVectorKey)
 {
-    return ptrVectorKey->mTime;
+    return (float)ptrVectorKey->mTime;
 }
 ASSIMP_API uint aiMeshMorphKey_GetNumValues(aiMeshMorphKey* ptrVectorKey)
 {
@@ -631,11 +631,11 @@ ASSIMP_API uint aiMeshMorphKey_GetValue(aiMeshMorphKey* ptrVectorKey, uint uintI
 }
 ASSIMP_API float aiMeshMorphKey_GetWeight(aiMeshMorphKey* ptrVectorKey, uint uintIndex)
 {
-    return ptrVectorKey->mWeights[uintIndex];
+    return (float)ptrVectorKey->mWeights[uintIndex];
 }
 ASSIMP_API float aiVectorKey_GetTime(aiVectorKey* ptrVectorKey)
 {
-    return ptrVectorKey->mTime;
+    return (float)ptrVectorKey->mTime;
 }
 ASSIMP_API void* aiVectorKey_GetValue(aiVectorKey* ptrVectorKey)
 {
@@ -645,7 +645,7 @@ ASSIMP_API void* aiVectorKey_GetValue(aiVectorKey* ptrVectorKey)
 
 ASSIMP_API float aiQuatKey_GetTime(aiQuatKey* ptrQuatKey)
 {
-    return ptrQuatKey->mTime;
+    return (float)ptrQuatKey->mTime;
 }
 ASSIMP_API void* aiQuatKey_GetValue(aiQuatKey* ptrQuatKey)
 {
@@ -754,6 +754,7 @@ ASSIMP_API void* aiScene_GetMetadataValue(aiScene* ptrScene, uint uintIndex)
     }
     return nullptr;
 }
+
 
 #ifdef __cplusplus
 }

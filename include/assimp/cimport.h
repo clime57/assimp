@@ -59,6 +59,10 @@ struct aiScene;  // aiScene.h
 struct aiFileIO; // aiFileIO.h
 typedef void (*aiLogStreamCallback)(const char* /* message */, char* /* user */);
 
+
+typedef void*(*(DataCallback))(const char* pFile, int fileId, int& fileSize);
+typedef bool(*(ExistsCallback))(const char* pFile, int fileId);
+typedef void(*(ProgressCallback))(float);
 // --------------------------------------------------------------------------------
 /** C-API: Represents a log stream. A log stream receives all log messages and
  *  streams them _somewhere_.
@@ -113,7 +117,8 @@ typedef int aiBool;
  */
 ASSIMP_API const C_STRUCT aiScene* aiImportFile(
     const char* pFile,
-    unsigned int pFlags);
+    unsigned int pFlags,
+    ProgressCallback progressCallback);
 
 // --------------------------------------------------------------------------------
 /** Reads the given file using user-defined I/O functions and returns
@@ -139,9 +144,10 @@ ASSIMP_API const C_STRUCT aiScene* aiImportFile(
 ASSIMP_API const C_STRUCT aiScene* aiImportFileEx(
     const char* pFile,
     unsigned int pFlags,
-    C_STRUCT aiFileIO* pFS);
+    C_STRUCT aiFileIO* pFS,
+    ProgressCallback progressCallback);
 
- typedef void (*(ProgressCallback))(float) ;
+
 // --------------------------------------------------------------------------------
 /** Same as #aiImportFileEx, but adds an extra parameter containing importer settings.
  *
@@ -163,7 +169,7 @@ ASSIMP_API const C_STRUCT aiScene* aiImportFileExWithProperties(
     unsigned int pFlags,
     C_STRUCT aiFileIO* pFS,
     const C_STRUCT aiPropertyStore* pProps,
-    ProgressCallback progressCallback = nullptr);
+    ProgressCallback progressCallback);
 
 // --------------------------------------------------------------------------------
 /** Reads the given file from a given memory buffer,
@@ -200,7 +206,10 @@ ASSIMP_API const C_STRUCT aiScene* aiImportFileFromMemory(
     const char* pBuffer,
     unsigned int pLength,
     unsigned int pFlags,
-    const char* pHint);
+    const char* pHint,
+    DataCallback dataCallback,
+    ExistsCallback existsCallback,
+    ProgressCallback progressCallback);
 
 // --------------------------------------------------------------------------------
 /** Same as #aiImportFileFromMemory, but adds an extra parameter containing importer settings.
@@ -235,7 +244,10 @@ ASSIMP_API const C_STRUCT aiScene* aiImportFileFromMemoryWithProperties(
     unsigned int pLength,
     unsigned int pFlags,
     const char* pHint,
-    const C_STRUCT aiPropertyStore* pProps);
+    const C_STRUCT aiPropertyStore* pProps,
+    DataCallback dataCallback,
+    ExistsCallback existsCallback,
+    ProgressCallback progressCallback);
 
 // --------------------------------------------------------------------------------
 /** Apply post-processing to an already-imported scene.
@@ -560,6 +572,12 @@ ASSIMP_API size_t aiGetImportFormatCount(void);
  * @return A description of that specific import format. NULL if pIndex is out of range.
  */
 ASSIMP_API const C_STRUCT aiImporterDesc* aiGetImportFormatDescription( size_t pIndex);
+
+
+
+
+
+
 #ifdef __cplusplus
 }
 #endif

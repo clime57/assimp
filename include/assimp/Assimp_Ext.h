@@ -3,6 +3,7 @@
  */
 #pragma once
 #include "defs.h"
+
 #ifndef AI_ASSIMP_EXT_H_INC
 #define AI_ASSIMP_EXT_H_INC
 
@@ -25,6 +26,8 @@ struct aiFace;
 struct aiBone;
 struct aiVertexWeight;
 struct aiMeshMorphKey;
+struct aiFileIO;
+struct aiPropertyStore;
 
 #ifdef __cplusplus
 }

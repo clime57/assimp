@@ -154,13 +154,13 @@ void ReportSceneNotFoundError() {
 
 // ------------------------------------------------------------------------------------------------
 // Reads the given file and returns its content.
-const aiScene* aiImportFile( const char* pFile, unsigned int pFlags) {
-    return aiImportFileEx(pFile,pFlags,NULL);
+const aiScene* aiImportFile( const char* pFile, unsigned int pFlags, ProgressCallback progressCallback) {
+    return aiImportFileEx(pFile,pFlags,NULL, progressCallback);
 }
 
 // ------------------------------------------------------------------------------------------------
-const aiScene* aiImportFileEx( const char* pFile, unsigned int pFlags,  aiFileIO* pFS) {
-    return aiImportFileExWithProperties(pFile, pFlags, pFS, NULL);
+const aiScene* aiImportFileEx( const char* pFile, unsigned int pFlags,  aiFileIO* pFS,ProgressCallback progressCallback) {
+    return aiImportFileExWithProperties(pFile, pFlags, pFS, NULL, progressCallback);
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -213,9 +213,12 @@ const aiScene* aiImportFileFromMemory(
     const char* pBuffer,
     unsigned int pLength,
     unsigned int pFlags,
-    const char* pHint)
+    const char* pHint,
+    DataCallback dataCallback,
+    ExistsCallback existsCallback,
+    ProgressCallback progressCallback)
 {
-    return aiImportFileFromMemoryWithProperties(pBuffer, pLength, pFlags, pHint, NULL);
+    return aiImportFileFromMemoryWithProperties(pBuffer, pLength, pFlags, pHint, NULL, dataCallback, existsCallback, progressCallback);
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -224,7 +227,10 @@ const aiScene* aiImportFileFromMemoryWithProperties(
     unsigned int pLength,
     unsigned int pFlags,
     const char* pHint,
-    const aiPropertyStore* props)
+    const aiPropertyStore* props,
+    DataCallback dataCallback,
+    ExistsCallback existsCallback,
+    ProgressCallback progressCallback)
 {
     ai_assert( NULL != pBuffer );
     ai_assert( 0 != pLength );
