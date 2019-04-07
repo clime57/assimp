@@ -548,6 +548,10 @@ ASSIMP_API uint aiAnimation_GetNumChannels(aiAnimation* ptrAnimation)
 {
     return ptrAnimation->mNumChannels;
 }
+ASSIMP_API uint aiAnimation_GetNumMorphChannels(aiAnimation* ptrAnimation)
+{
+    return ptrAnimation->mNumMorphMeshChannels;
+}
 ASSIMP_API void* aiAnimation_GetMeshMorphAnim(aiAnimation* ptrAnimation, uint uintIndex)
 {
     return ptrAnimation->mMorphMeshChannels[uintIndex];
@@ -558,7 +562,7 @@ ASSIMP_API uint aiAnimation_GetNumMeshChannels(aiAnimation* ptrAnimation)
 }
 ASSIMP_API void* aiAnimation_GetAnimationChannel(aiAnimation* ptrAnimation, uint uintIndex)
 {
-    return &ptrAnimation->mMeshChannels[uintIndex];
+    return ptrAnimation->mMeshChannels[uintIndex];
 }
 ASSIMP_API const char* aiNodeAnim_GetNodeName(aiNodeAnim* ptrNodeAnim)
 {

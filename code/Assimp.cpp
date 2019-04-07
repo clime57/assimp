@@ -165,7 +165,8 @@ const aiScene* aiImportFileEx( const char* pFile, unsigned int pFlags,  aiFileIO
 
 // ------------------------------------------------------------------------------------------------
 const aiScene* aiImportFileExWithProperties( const char* pFile, unsigned int pFlags, 
-        aiFileIO* pFS, const aiPropertyStore* props) {
+        aiFileIO* pFS, const aiPropertyStore* props,
+    ProgressCallback progressCallback ) {
     ai_assert(NULL != pFile);
 
     const aiScene* scene = NULL;

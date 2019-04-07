@@ -141,6 +141,7 @@ ASSIMP_API const C_STRUCT aiScene* aiImportFileEx(
     unsigned int pFlags,
     C_STRUCT aiFileIO* pFS);
 
+ typedef void (*(ProgressCallback))(float) ;
 // --------------------------------------------------------------------------------
 /** Same as #aiImportFileEx, but adds an extra parameter containing importer settings.
  *
@@ -161,7 +162,8 @@ ASSIMP_API const C_STRUCT aiScene* aiImportFileExWithProperties(
     const char* pFile,
     unsigned int pFlags,
     C_STRUCT aiFileIO* pFS,
-    const C_STRUCT aiPropertyStore* pProps);
+    const C_STRUCT aiPropertyStore* pProps,
+    ProgressCallback progressCallback = nullptr);
 
 // --------------------------------------------------------------------------------
 /** Reads the given file from a given memory buffer,
