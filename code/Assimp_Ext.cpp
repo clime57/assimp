@@ -265,36 +265,40 @@ ASSIMP_API uint aiMaterial_GetNumTextureHeight(aiMaterial* ptrMat)
 
 ASSIMP_API bool aiMaterial_HasAmbient(aiMaterial* ptrMat)
 {
-    return ptrMat->GetTextureCount(aiTextureType_AMBIENT) > 0;
+    aiColor4D colorOut;
+    return ptrMat->Get(AI_MATKEY_COLOR_AMBIENT, colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetAmbient(aiMaterial* ptrMat, aiColor4D* colorOut)
 {
-    return ptrMat->Get(AI_MATKEY_COLOR_AMBIENT, colorOut) == aiReturn_SUCCESS;
+    return ptrMat->Get(AI_MATKEY_COLOR_AMBIENT, *colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasDiffuse(aiMaterial* ptrMat)
 {
-    return ptrMat->GetTextureCount(aiTextureType_DIFFUSE) > 0;
+    aiColor4D colorOut;
+    return ptrMat->Get(AI_MATKEY_COLOR_DIFFUSE, colorOut) == aiReturn_SUCCESS;
 }
 
 ASSIMP_API bool aiMaterial_GetDiffuse(aiMaterial* ptrMat, aiColor4D* colorOut)
 {
-    return ptrMat->Get(AI_MATKEY_COLOR_DIFFUSE, colorOut) == aiReturn_SUCCESS;
+    return ptrMat->Get(AI_MATKEY_COLOR_DIFFUSE, *colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasSpecular(aiMaterial* ptrMat)
 {
-    return ptrMat->GetTextureCount(aiTextureType_SPECULAR) > 0;
+    aiColor4D colorOut;
+    return ptrMat->Get(AI_MATKEY_COLOR_SPECULAR, colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetSpecular(aiMaterial* ptrMat, aiColor4D* colorOut)
 {
-    return ptrMat->Get(AI_MATKEY_COLOR_SPECULAR, colorOut) == aiReturn_SUCCESS;
+    return ptrMat->Get(AI_MATKEY_COLOR_SPECULAR, *colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasEmissive(aiMaterial* ptrMat)
 {
-    return ptrMat->GetTextureCount(aiTextureType_EMISSIVE) > 0;
+    aiColor4D colorOut;
+    return ptrMat->Get(AI_MATKEY_COLOR_EMISSIVE, colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetEmissive(aiMaterial* ptrMat, aiColor4D* colorOut)
 {
-    return ptrMat->Get(AI_MATKEY_COLOR_EMISSIVE, colorOut) == aiReturn_SUCCESS;
+    return ptrMat->Get(AI_MATKEY_COLOR_EMISSIVE, *colorOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasName(aiMaterial* ptrMat)
 {
@@ -562,7 +566,7 @@ ASSIMP_API uint aiAnimation_GetNumMeshChannels(aiAnimation* ptrAnimation)
 }
 ASSIMP_API void* aiAnimation_GetAnimationChannel(aiAnimation* ptrAnimation, uint uintIndex)
 {
-    return ptrAnimation->mMeshChannels[uintIndex];
+    return ptrAnimation->mChannels[uintIndex];
 }
 ASSIMP_API const char* aiNodeAnim_GetNodeName(aiNodeAnim* ptrNodeAnim)
 {
