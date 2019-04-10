@@ -213,12 +213,13 @@ const aiScene* aiImportFileFromMemory(
     const char* pBuffer,
     unsigned int pLength,
     unsigned int pFlags,
+    int fileId,
     const char* pHint,
     DataCallback dataCallback,
     ExistsCallback existsCallback,
     ProgressCallback progressCallback)
 {
-    return aiImportFileFromMemoryWithProperties(pBuffer, pLength, pFlags, pHint, NULL, dataCallback, existsCallback, progressCallback);
+    return aiImportFileFromMemoryWithProperties(pBuffer, pLength, pFlags, fileId, pHint, NULL, dataCallback, existsCallback, progressCallback);
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -226,6 +227,7 @@ const aiScene* aiImportFileFromMemoryWithProperties(
     const char* pBuffer,
     unsigned int pLength,
     unsigned int pFlags,
+    int fileId,
     const char* pHint,
     const aiPropertyStore* props,
     DataCallback dataCallback,
