@@ -188,7 +188,10 @@ const aiScene* aiImportFileExWithProperties( const char* pFile, unsigned int pFl
     if (pFS) {
         imp->SetIOHandler( new CIOSystemWrapper (pFS) );
     }
-
+    if (progressCallback)
+    {
+        progressCallback(0);
+    }
     // and have it read the file
     scene = imp->ReadFile( pFile, pFlags);
 
@@ -196,6 +199,10 @@ const aiScene* aiImportFileExWithProperties( const char* pFile, unsigned int pFl
     if( scene)  {
         ScenePrivateData* priv = const_cast<ScenePrivateData*>( ScenePriv(scene) );
         priv->mOrigImporter = imp;
+        if (progressCallback)
+        {
+            progressCallback(1);
+        }
     } else {
         // if failed, extract error code and destroy the import
         gLastErrorString = imp->GetErrorString();
@@ -204,7 +211,6 @@ const aiScene* aiImportFileExWithProperties( const char* pFile, unsigned int pFl
 
     // return imported data. If the import failed the pointer is NULL anyways
     ASSIMP_END_EXCEPTION_REGION(const aiScene*);
-    
     return scene;
 }
 
@@ -242,7 +248,10 @@ const aiScene* aiImportFileFromMemoryWithProperties(
 
     // create an Importer for this file
     Assimp::Importer* imp = new Assimp::Importer();
-
+    if (progressCallback)
+    {
+        progressCallback(0);
+    }
     // copy properties
     if(props) {
         const PropertyMap* pp = reinterpret_cast<const PropertyMap*>(props);
@@ -260,6 +269,10 @@ const aiScene* aiImportFileFromMemoryWithProperties(
     if( scene)  {
          ScenePrivateData* priv = const_cast<ScenePrivateData*>( ScenePriv(scene) );
          priv->mOrigImporter = imp;
+         if (progressCallback)
+         {
+             progressCallback(1);
+         }
     }
     else    {
         // if failed, extract error code and destroy the import
