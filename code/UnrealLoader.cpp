@@ -126,8 +126,8 @@ void UnrealImporter::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void UnrealImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::UnrealImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     // For any of the 3 files being passed get the three correct paths
     // First of all, determine file extension

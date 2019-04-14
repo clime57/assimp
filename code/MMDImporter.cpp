@@ -103,12 +103,12 @@ const aiImporterDesc *MMDImporter::GetInfo() const { return &desc; }
 
 // ------------------------------------------------------------------------------------------------
 //  MMD import implementation
-void MMDImporter::InternReadFile(const std::string &file, aiScene *pScene,
-                                 IOSystem * /*pIOHandler*/) {
+void MMDImporter::InternReadFile(const std::string& pFile, aiScene* pScene,
+                                 IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
   // Read file by istream
   std::filebuf fb;
-  if (!fb.open(file, std::ios::in | std::ios::binary)) {
-    throw DeadlyImportError("Failed to open file " + file + ".");
+  if (!fb.open(pFile, std::ios::in | std::ios::binary)) {
+    throw DeadlyImportError("Failed to open file " + pFile + ".");
   }
 
   std::istream fileStream(&fb);
@@ -119,7 +119,7 @@ void MMDImporter::InternReadFile(const std::string &file, aiScene *pScene,
   fileStream.seekg(0, fileStream.beg);
 
   if (fileSize < sizeof(pmx::PmxModel)) {
-    throw DeadlyImportError(file + " is too small.");
+    throw DeadlyImportError(pFile + " is too small.");
   }
 
   pmx::PmxModel model;

@@ -57,7 +57,7 @@ public:
     const aiImporterDesc *GetInfo() const;
 
 protected:
-    void InternReadFile(const std::string &pFile, aiScene *pScene, IOSystem *pIOHandler);
+    void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
 };
 
 } // Namespace Assimp

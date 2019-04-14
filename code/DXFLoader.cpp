@@ -147,12 +147,12 @@ const aiImporterDesc* DXFImporter::GetInfo () const {
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void DXFImporter::InternReadFile( const std::string& filename, aiScene* pScene, IOSystem* pIOHandler) {
-    std::shared_ptr<IOStream> file = std::shared_ptr<IOStream>( pIOHandler->Open( filename) );
+void Assimp::DXFImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
+    std::shared_ptr<IOStream> file = std::shared_ptr<IOStream>( pIOHandler->Open(pFile) );
 
     // Check whether we can read the file
     if( file.get() == nullptr ) {
-        throw DeadlyImportError( "Failed to open DXF file " + filename + "");
+        throw DeadlyImportError( "Failed to open DXF file " + pFile + "");
     }
 
     // Check whether this is a binary DXF file - we can't read binary DXF files :-(

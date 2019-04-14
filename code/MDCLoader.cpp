@@ -221,8 +221,8 @@ void MDCImporter::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void MDCImporter::InternReadFile(
-    const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::MDCImporter::InternReadFile(
+    const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile));
 

@@ -135,11 +135,11 @@ void MD5Importer::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void MD5Importer::InternReadFile( const std::string& pFile,
-                                 aiScene* _pScene, IOSystem* _pIOHandler)
+void Assimp::MD5Importer::InternReadFile( const std::string& pFile,
+                                 aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
-    pIOHandler = _pIOHandler;
-    pScene     = _pScene;
+    pIOHandler = pIOHandler;
+    pScene     = pScene;
     bHadMD5Mesh = bHadMD5Anim = bHadMD5Camera = false;
 
     // remove the file extension

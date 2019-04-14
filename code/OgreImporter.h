@@ -68,7 +68,7 @@ public:
     virtual bool CanRead(const std::string &pFile, IOSystem *pIOHandler, bool checkSig) const;
 
     /// BaseImporter override.
-    virtual void InternReadFile(const std::string &pFile, aiScene *pScene, IOSystem *pIOHandler);
+    virtual void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
 
     /// BaseImporter override.
     virtual const aiImporterDesc *GetInfo() const;

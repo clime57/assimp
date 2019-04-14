@@ -193,7 +193,7 @@ const aiScene* aiImportFileExWithProperties( const char* pFile, unsigned int pFl
         progressCallback(0);
     }
     // and have it read the file
-    scene = imp->ReadFile( pFile, pFlags);
+    scene = imp->ReadFile( pFile, pFlags, nullptr, nullptr, progressCallback);
 
     // if succeeded, store the importer in the scene and keep it alive
     if( scene)  {
@@ -263,7 +263,7 @@ const aiScene* aiImportFileFromMemoryWithProperties(
     }
 
     // and have it read the file from the memory buffer
-    scene = imp->ReadFileFromMemory( pBuffer, pLength, pFlags,pHint);
+    scene = imp->ReadFileFromMemory( pBuffer, pLength, pFlags,pHint, dataCallback, existsCallback, progressCallback);
 
     // if succeeded, store the importer in the scene and keep it alive
     if( scene)  {

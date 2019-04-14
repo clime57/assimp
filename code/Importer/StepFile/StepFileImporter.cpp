@@ -93,11 +93,11 @@ const aiImporterDesc *StepFileImporter::GetInfo() const {
 static const std::string mode = "rb";
 static const std::string StepFileSchema = "CONFIG_CONTROL_DESIGN";
 
-void StepFileImporter::InternReadFile(const std::string &file, aiScene* pScene, IOSystem* pIOHandler) {
+void StepFileImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     // Read file into memory
-    std::shared_ptr<IOStream> fileStream(pIOHandler->Open(file, mode));
+    std::shared_ptr<IOStream> fileStream(pIOHandler->Open(pFile, mode));
     if (!fileStream.get()) {
-        throw DeadlyImportError("Failed to open file " + file + ".");
+        throw DeadlyImportError("Failed to open file " + pFile + ".");
     }
 
     std::unique_ptr<STEP::DB> db(STEP::ReadFileHeader(fileStream));

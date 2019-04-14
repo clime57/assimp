@@ -509,8 +509,8 @@ std::string LWSImporter::FindLWOFile(const std::string& in)
 
 // ------------------------------------------------------------------------------------------------
 // Read file into given scene data structure
-void LWSImporter::InternReadFile( const std::string& pFile, aiScene* pScene,
-    IOSystem* pIOHandler)
+void Assimp::LWSImporter::InternReadFile( const std::string& pFile, aiScene* pScene,
+    IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     io = pIOHandler;
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile, "rb"));

@@ -853,8 +853,8 @@ static void ReadScene(SIB* sib, StreamReaderLE* stream)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void SIBImporter::InternReadFile(const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::SIBImporter::InternReadFile(const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     StreamReaderLE stream(pIOHandler->Open(pFile, "rb"));
 

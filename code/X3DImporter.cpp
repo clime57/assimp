@@ -1663,7 +1663,7 @@ const aiImporterDesc* X3DImporter::GetInfo () const
 	return &Description;
 }
 
-void X3DImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void X3DImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
 	mpIOHandler = pIOHandler;
 

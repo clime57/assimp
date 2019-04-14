@@ -147,7 +147,7 @@ static bool isBigEndian(const char* szMe) {
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void PLYImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) {
+void Assimp::PLYImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     const std::string mode = "rb";
     std::unique_ptr<IOStream> fileStream(pIOHandler->Open(pFile, mode));
     if (!fileStream.get()) {

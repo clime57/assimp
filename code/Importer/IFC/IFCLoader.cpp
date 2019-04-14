@@ -168,7 +168,7 @@ void IFCImporter::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void IFCImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::IFCImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::shared_ptr<IOStream> stream(pIOHandler->Open(pFile));
     if (!stream) {

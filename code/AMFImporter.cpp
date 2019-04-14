@@ -692,7 +692,7 @@ const aiImporterDesc* AMFImporter::GetInfo () const
 	return &Description;
 }
 
-void AMFImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void AMFImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
 	Clear();// delete old graph.
 	ParseFile(pFile, pIOHandler);

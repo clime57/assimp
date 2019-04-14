@@ -120,8 +120,8 @@ void TerragenImporter::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void TerragenImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::TerragenImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     IOStream* file = pIOHandler->Open( pFile, "rb");
 

@@ -395,9 +395,7 @@ public:
      * @note Assimp is able to determine the file format of a file
      * automatically.
      */
-    const aiScene* ReadFile(
-        const char* pFile,
-        unsigned int pFlags);
+    const aiScene* ReadFile( const char* pFile, unsigned int pFlags,DataCallback dataCallback,ExistsCallback existsCallback,ProgressCallback progressCallback);
 
     // -------------------------------------------------------------------
     /** Reads the given file from a memory buffer and returns its
@@ -440,7 +438,10 @@ public:
         const void* pBuffer,
         size_t pLength,
         unsigned int pFlags,
-        const char* pHint = "");
+        const char* pHint = "",
+        DataCallback dataCallback = nullptr,
+        ExistsCallback existsCallback = nullptr,
+        ProgressCallback progressCallback = nullptr);
 
     // -------------------------------------------------------------------
     /** Apply post-processing to an already-imported scene.
@@ -472,7 +473,10 @@ public:
      * @see ReadFile(const char*, pFlags)  */
     const aiScene* ReadFile(
         const std::string& pFile,
-        unsigned int pFlags);
+        unsigned int pFlags,
+        DataCallback dataCallback,
+        ExistsCallback existsCallback,
+        ProgressCallback progressCallback);
 
     // -------------------------------------------------------------------
     /** Frees the current scene.
@@ -640,8 +644,8 @@ protected:
 // ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE const aiScene* Importer::ReadFile( const std::string& pFile,unsigned int pFlags){
-    return ReadFile(pFile.c_str(),pFlags);
+AI_FORCE_INLINE const aiScene* Importer::ReadFile( const std::string& pFile,unsigned int pFlags, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback){
+    return ReadFile(pFile.c_str(),pFlags, dataCallback, existsCallback, progressCallback);
 }
 // ----------------------------------------------------------------------------
 AI_FORCE_INLINE void Importer::GetExtensionList(std::string& szOut) const   {

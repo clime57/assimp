@@ -134,8 +134,8 @@ static void releaseMesh( aiMesh **mesh ) {
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void IRRMeshImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::IRRMeshImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile));
 

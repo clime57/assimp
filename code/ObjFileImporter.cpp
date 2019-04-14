@@ -111,12 +111,12 @@ const aiImporterDesc* ObjFileImporter::GetInfo() const {
 
 // ------------------------------------------------------------------------------------------------
 //  Obj-file import implementation
-void ObjFileImporter::InternReadFile( const std::string &file, aiScene* pScene, IOSystem* pIOHandler) {
+void ObjFileImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     // Read file into memory
     static const std::string mode = "rb";
-    std::unique_ptr<IOStream> fileStream( pIOHandler->Open( file, mode));
+    std::unique_ptr<IOStream> fileStream( pIOHandler->Open( pFile, mode));
     if( !fileStream.get() ) {
-        throw DeadlyImportError( "Failed to open file " + file + "." );
+        throw DeadlyImportError( "Failed to open file " + pFile + "." );
     }
 
     // Get the file-size and validate it, throwing an exception when fails
@@ -133,23 +133,31 @@ void ObjFileImporter::InternReadFile( const std::string &file, aiScene* pScene, 
 
     // Get the model name
     std::string  modelName, folderName;
-    std::string::size_type pos = file.find_last_of( "\\/" );
+    std::string::size_type pos = pFile.find_last_of( "\\/" );
     if ( pos != std::string::npos ) {
-        modelName = file.substr(pos+1, file.size() - pos - 1);
-        folderName = file.substr( 0, pos );
+        modelName = pFile.substr(pos+1, pFile.size() - pos - 1);
+        folderName = pFile.substr( 0, pos );
         if ( !folderName.empty() ) {
             pIOHandler->PushDirectory( folderName );
         }
     } else {
-        modelName = file;
+        modelName = pFile;
     }
 
     // parse the file into a temporary representation
-    ObjFileParser parser( streamedBuffer, modelName, pIOHandler, m_progress, file);
+    ObjFileParser parser( streamedBuffer, modelName, pIOHandler, m_progress, pFile);
 
+    if (progressCallback)
+    {
+        progressCallback(50);
+    }
     // And create the proper return structures out of it
     CreateDataFromImport(parser.GetModel(), pScene);
 
+    if (progressCallback)
+    {
+        progressCallback(70);
+    }
     streamedBuffer.close();
 
     // Clean up allocated storage for the next import

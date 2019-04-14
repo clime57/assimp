@@ -787,8 +787,8 @@ void AC3DImporter::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void AC3DImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::AC3DImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile, "rb"));
 

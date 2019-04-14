@@ -59,10 +59,6 @@ struct aiScene;  // aiScene.h
 struct aiFileIO; // aiFileIO.h
 typedef void (*aiLogStreamCallback)(const char* /* message */, char* /* user */);
 
-
-typedef void*(*(DataCallback))(const char* pFile, int fileId, int& fileSize);
-typedef bool(*(ExistsCallback))(const char* pFile, int fileId);
-typedef void(*(ProgressCallback))(float);
 // --------------------------------------------------------------------------------
 /** C-API: Represents a log stream. A log stream receives all log messages and
  *  streams them _somewhere_.

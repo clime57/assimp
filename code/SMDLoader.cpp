@@ -129,7 +129,7 @@ void SMDImporter::SetupProperties(const Importer* pImp) {
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void SMDImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) {
+void Assimp::SMDImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     this->pScene = pScene;
     ReadSmd(pFile, pIOHandler);
 

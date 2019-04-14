@@ -119,7 +119,7 @@ const aiImporterDesc* B3DImporter::GetInfo () const
     extern "C"{ void _stdcall AllocConsole(); }
 #endif
 // ------------------------------------------------------------------------------------------------
-void B3DImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler){
+void Assimp::B3DImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback){
 
 #ifdef DEBUG_B3D
     AllocConsole();

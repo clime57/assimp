@@ -138,9 +138,12 @@ const aiImporterDesc* LWOImporter::GetInfo () const
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void LWOImporter::InternReadFile( const std::string& pFile,
+void Assimp::LWOImporter::InternReadFile( const std::string& pFile,
     aiScene* pScene,
-    IOSystem* pIOHandler)
+    IOSystem* pIOHandler,
+    DataCallback dataCallback,
+    ExistsCallback existsCallback,
+    ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile, "rb"));
 

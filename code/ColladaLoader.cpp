@@ -150,7 +150,7 @@ const aiImporterDesc* ColladaLoader::GetInfo () const
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void ColladaLoader::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) {
+void Assimp::ColladaLoader::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     mFileName = pFile;
 
     // clean all member arrays - just for safety, it should work even if we did not

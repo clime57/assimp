@@ -526,4 +526,9 @@ struct aiMemoryInfo
 #include "matrix3x3.inl"
 #include "matrix4x4.inl"
 
+//Unity3d Callbacks
+typedef void*(*(DataCallback))(const char* pFile, int fileId, int& fileSize);
+typedef bool(*(ExistsCallback))(const char* pFile, int fileId);
+typedef void(*(ProgressCallback))(float);
+
 #endif // AI_TYPES_H_INC

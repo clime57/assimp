@@ -201,7 +201,7 @@ protected:
     // -------------------------------------------------------------------
     // Import file into given scene data structure
     void InternReadFile( const std::string& pFile, aiScene* pScene,
-        IOSystem* pIOHandler);
+        IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
 
     // -------------------------------------------------------------------
     // Setup import properties

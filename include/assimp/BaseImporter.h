@@ -134,7 +134,12 @@ public:
     aiScene* ReadFile(
         const Importer* pImp,
         const std::string& pFile,
-        IOSystem* pIOHandler
+        IOSystem* pIOHandler,
+        DataCallback dataCallback
+        ,
+        ExistsCallback existsCallback
+        ,
+        ProgressCallback progressCallback
         );
 
     // -------------------------------------------------------------------
@@ -217,7 +222,12 @@ protected:
     virtual void InternReadFile(
         const std::string& pFile,
         aiScene* pScene,
-        IOSystem* pIOHandler
+        IOSystem* pIOHandler,
+        DataCallback dataCallback
+        ,
+        ExistsCallback existsCallback
+        ,
+        ProgressCallback progressCallback
         ) = 0;
 
 public: // static utilities

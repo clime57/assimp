@@ -212,8 +212,8 @@ void MS3DImporter :: CollectChildJoints(const std::vector<TempJoint>& joints, ai
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void MS3DImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::MS3DImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     StreamReaderLE stream(pIOHandler->Open(pFile,"rb"));
 

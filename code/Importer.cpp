@@ -467,7 +467,10 @@ bool Importer::ValidateFlags(unsigned int pFlags) const
 const aiScene* Importer::ReadFileFromMemory( const void* pBuffer,
     size_t pLength,
     unsigned int pFlags,
-    const char* pHint /*= ""*/)
+    const char* pHint /*= ""*/,
+    DataCallback dataCallback,
+    ExistsCallback existsCallback,
+    ProgressCallback progressCallback)
 {
     ASSIMP_BEGIN_EXCEPTION_REGION();
     if (!pHint) {
@@ -490,7 +493,7 @@ const aiScene* Importer::ReadFileFromMemory( const void* pBuffer,
     char fbuff[BufSize];
     ai_snprintf(fbuff, BufSize, "%s.%s",AI_MEMORYIO_MAGIC_FILENAME,pHint);
 
-    ReadFile(fbuff,pFlags);
+    ReadFile(fbuff,pFlags, dataCallback, existsCallback, progressCallback);
     SetIOHandler(io);
 
     ASSIMP_END_EXCEPTION_REGION(const aiScene*);
@@ -550,7 +553,7 @@ void WriteLogOpening(const std::string& file)
 
 // ------------------------------------------------------------------------------------------------
 // Reads the given file and returns its contents if successful.
-const aiScene* Importer::ReadFile( const char* _pFile, unsigned int pFlags)
+const aiScene* Importer::ReadFile( const char* _pFile, unsigned int pFlags, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     ASSIMP_BEGIN_EXCEPTION_REGION();
     const std::string pFile(_pFile);
@@ -640,7 +643,7 @@ const aiScene* Importer::ReadFile( const char* _pFile, unsigned int pFlags)
             profiler->BeginRegion("import");
         }
 
-        pimpl->mScene = imp->ReadFile( this, pFile, pimpl->mIOHandler);
+        pimpl->mScene = imp->ReadFile( this, pFile, pimpl->mIOHandler, dataCallback, existsCallback, progressCallback);
         pimpl->mProgressHandler->UpdateFileRead( fileSize, fileSize );
 
         if (profiler) {

@@ -118,7 +118,7 @@ static void NextToken(const char **car, const char* end) {
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void OFFImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) {
+void Assimp::OFFImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile, "rb"));
 
     // Check whether we can read from the file

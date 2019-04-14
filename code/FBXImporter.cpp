@@ -144,7 +144,7 @@ void FBXImporter::SetupProperties(const Importer* pImp)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void FBXImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::FBXImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> stream(pIOHandler->Open(pFile,"rb"));
     if (!stream) {
@@ -159,6 +159,10 @@ void FBXImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOS
     std::vector<char> contents;
     contents.resize(stream->FileSize()+1);
     stream->Read( &*contents.begin(), 1, contents.size()-1 );
+    if (progressCallback)
+    {
+        progressCallback(50);
+    }
     contents[ contents.size() - 1 ] = 0;
     const char* const begin = &*contents.begin();
 
@@ -175,7 +179,10 @@ void FBXImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOS
         else {
             Tokenize(tokens,begin);
         }
-
+        if (progressCallback)
+        {
+            progressCallback(70);
+        }
         // use this information to construct a very rudimentary
         // parse-tree representing the FBX scope structure
         Parser parser(tokens, is_binary);

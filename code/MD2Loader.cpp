@@ -215,8 +215,8 @@ void MD2Importer::ValidateHeader( )
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void MD2Importer::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::MD2Importer::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile));
 

@@ -467,8 +467,8 @@ const aiImporterDesc *D3MFImporter::GetInfo() const {
     return &desc;
 }
 
-void D3MFImporter::InternReadFile( const std::string &filename, aiScene *pScene, IOSystem *pIOHandler ) {
-    D3MF::D3MFOpcPackage opcPackage(pIOHandler, filename);
+void D3MFImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback ) {
+    D3MF::D3MFOpcPackage opcPackage(pIOHandler, pFile);
 
     std::unique_ptr<CIrrXML_IOStreamReader> xmlStream(new CIrrXML_IOStreamReader(opcPackage.RootStream()));
     std::unique_ptr<D3MF::XmlReader> xmlReader(irr::io::createIrrXMLReader(xmlStream.get()));

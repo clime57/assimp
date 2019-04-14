@@ -140,8 +140,8 @@ const aiImporterDesc* XGLImporter::GetInfo () const
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void XGLImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::XGLImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
 #ifndef ASSIMP_BUILD_NO_COMPRESSED_XGL
     std::vector<Bytef> uncompressed;

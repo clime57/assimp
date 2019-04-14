@@ -293,11 +293,11 @@ bool OpenGEXImporter::CanRead( const std::string &file, IOSystem *pIOHandler, bo
 }
 
 //------------------------------------------------------------------------------------------------
-void OpenGEXImporter::InternReadFile( const std::string &filename, aiScene *pScene, IOSystem *pIOHandler ) {
+void OpenGEXImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback ) {
     // open source file
-    IOStream *file = pIOHandler->Open( filename, "rb" );
+    IOStream *file = pIOHandler->Open( pFile, "rb" );
     if( !file ) {
-        throw DeadlyImportError( "Failed to open file " + filename );
+        throw DeadlyImportError( "Failed to open file " + pFile );
     }
 
     std::vector<char> buffer;
@@ -310,7 +310,7 @@ void OpenGEXImporter::InternReadFile( const std::string &filename, aiScene *pSce
     if( success ) {
         m_ctx = myParser.getContext();
         pScene->mRootNode = new aiNode;
-        pScene->mRootNode->mName.Set( filename );
+        pScene->mRootNode->mName.Set( pFile );
         handleNodes( m_ctx->m_root, pScene );
     }
 

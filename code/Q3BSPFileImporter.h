@@ -83,7 +83,7 @@ protected:
     typedef std::map<std::string, std::vector<Q3BSP::sQ3BSPFace*>*>::const_iterator FaceMapConstIt;
 
     const aiImporterDesc* GetInfo () const;
-    void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler);
+    void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
     void separateMapName( const std::string &rImportName, std::string &rArchiveName, std::string &rMapName );
     bool findFirstMapInArchive( Q3BSP::Q3BSPZipArchive &rArchive, std::string &rMapName );
     void CreateDataFromImport( const Q3BSP::Q3BSPModel *pModel, aiScene* pScene, Q3BSP::Q3BSPZipArchive *pArchive );

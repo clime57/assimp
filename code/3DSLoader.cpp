@@ -157,8 +157,8 @@ void Discreet3DSImporter::SetupProperties(const Importer* /*pImp*/)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void Discreet3DSImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::Discreet3DSImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     StreamReaderLE stream(pIOHandler->Open(pFile,"rb"));
 

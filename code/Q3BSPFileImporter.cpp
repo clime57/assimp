@@ -180,14 +180,14 @@ const aiImporterDesc* Q3BSPFileImporter::GetInfo () const {
 
 // ------------------------------------------------------------------------------------------------
 //  Import method.
-void Q3BSPFileImporter::InternReadFile(const std::string &rFile, aiScene* scene, IOSystem* ioHandler) {
-    Q3BSPZipArchive Archive( ioHandler, rFile );
+void Q3BSPFileImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
+    Q3BSPZipArchive Archive( pIOHandler, pFile );
     if ( !Archive.isOpen() ) {
-        throw DeadlyImportError( "Failed to open file " + rFile + "." );
+        throw DeadlyImportError( "Failed to open file " + pFile + "." );
     }
 
     std::string archiveName( "" ), mapName( "" );
-    separateMapName( rFile, archiveName, mapName );
+    separateMapName( pFile, archiveName, mapName );
 
     if ( mapName.empty() ) {
         if ( !findFirstMapInArchive( Archive, mapName ) ) {
@@ -198,7 +198,7 @@ void Q3BSPFileImporter::InternReadFile(const std::string &rFile, aiScene* scene,
     Q3BSPFileParser fileParser( mapName, &Archive );
     Q3BSPModel *pBSPModel = fileParser.getModel();
     if ( nullptr != pBSPModel ) {
-        CreateDataFromImport( pBSPModel, scene, &Archive );
+        CreateDataFromImport( pBSPModel, pScene, &Archive );
     }
 }
 

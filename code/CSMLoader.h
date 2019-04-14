@@ -81,7 +81,7 @@ protected:
 
     // -------------------------------------------------------------------
     void InternReadFile( const std::string& pFile, aiScene* pScene,
-        IOSystem* pIOHandler);
+        IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
 
 private:
 

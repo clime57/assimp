@@ -113,8 +113,8 @@ void NDOImporter::SetupProperties(const Importer* /*pImp*/)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void NDOImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::NDOImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     StreamReaderBE reader(pIOHandler->Open( pFile, "rb"));
 

@@ -109,7 +109,7 @@ const aiImporterDesc* XFileImporter::GetInfo () const {
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void XFileImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) {
+void Assimp::XFileImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     // read file into memory
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile));
     if ( file.get() == NULL ) {

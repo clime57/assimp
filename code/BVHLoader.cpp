@@ -118,7 +118,7 @@ const aiImporterDesc* BVHLoader::GetInfo () const
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void BVHLoader::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::BVHLoader::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     mFileName = pFile;
 

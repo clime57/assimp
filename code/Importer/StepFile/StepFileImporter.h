@@ -58,7 +58,7 @@ public:
     const aiImporterDesc* GetInfo() const override;
 
 protected:
-    void InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler ) override;
+    void InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback ) override;
 
 private:
 };

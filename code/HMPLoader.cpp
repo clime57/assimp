@@ -112,11 +112,11 @@ const aiImporterDesc* HMPImporter::GetInfo () const
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void HMPImporter::InternReadFile( const std::string& pFile,
-                                 aiScene* _pScene, IOSystem* _pIOHandler)
+void Assimp::HMPImporter::InternReadFile( const std::string& pFile,
+                                 aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
-    pScene     = _pScene;
-    pIOHandler = _pIOHandler;
+    pScene     = pScene;
+    pIOHandler = pIOHandler;
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile));
 
     // Check whether we can read from the file

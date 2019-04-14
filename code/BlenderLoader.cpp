@@ -158,8 +158,8 @@ void BlenderImporter::SetupProperties(const Importer* /*pImp*/)
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void BlenderImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::BlenderImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
 #ifndef ASSIMP_BUILD_NO_COMPRESSED_BLEND
     std::vector<Bytef> uncompressed;

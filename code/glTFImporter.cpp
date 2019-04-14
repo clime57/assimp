@@ -717,7 +717,7 @@ void glTFImporter::ImportEmbeddedTextures(glTF::Asset& r)
     }
 }
 
-void glTFImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) {
+void Assimp::glTFImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
 
     this->mScene = pScene;
 

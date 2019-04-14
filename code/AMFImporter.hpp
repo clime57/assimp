@@ -409,7 +409,7 @@ public:
 
 	bool CanRead(const std::string& pFile, IOSystem* pIOHandler, bool pCheckSig) const;
 	void GetExtensionList(std::set<std::string>& pExtensionList);
-	void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler);
+	void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
 	const aiImporterDesc* GetInfo ()const;
 
     AMFImporter(const AMFImporter& pScene) = delete;

@@ -234,8 +234,8 @@ void NFFImporter::LoadNFF2MaterialTable(std::vector<ShadingInfo>& output,
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
-void NFFImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler)
+void Assimp::NFFImporter::InternReadFile( const std::string& pFile,
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile, "rb"));
 

@@ -83,7 +83,12 @@ public:
     virtual void InternReadFile(
     const std::string& pFile,
         aiScene* pScene,
-        IOSystem* pIOHandler
+        IOSystem* pIOHandler,
+        DataCallback dataCallback
+    ,
+        ExistsCallback existsCallback
+    ,
+        ProgressCallback progressCallback
     );
     void ReadHeader();
     void ReadBinaryScene( IOStream * stream, aiScene* pScene );

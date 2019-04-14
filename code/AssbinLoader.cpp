@@ -670,7 +670,7 @@ void AssbinImporter::ReadBinaryScene( IOStream * stream, aiScene* scene ) {
 }
 
 // -----------------------------------------------------------------------------------
-void AssbinImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler ) {
+void Assimp::AssbinImporter::InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback ) {
     IOStream * stream = pIOHandler->Open(pFile,"rb");
     if (nullptr == stream) {
         return;

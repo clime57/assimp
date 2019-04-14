@@ -71,7 +71,7 @@ private:
     const aiImporterDesc* GetInfo () const;
 
     //! \brief  File import implementation.
-    void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler);
+    void InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
 
     //! \brief  Create the data from imported content.
     void CreateDataFromImport(const pmx::PmxModel* pModel, aiScene* pScene);
