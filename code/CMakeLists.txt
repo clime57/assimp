@@ -140,6 +140,7 @@ SET( PUBLIC_HEADERS
   ${HEADER_PATH}/Macros.h
   ${HEADER_PATH}/Exceptional.h
   ${HEADER_PATH}/ByteSwapper.h
+  ${HEADER_PATH}/Assimp_Ext.h
 )
 
 SET( Core_SRCS
@@ -198,6 +199,7 @@ SET( Common_SRCS
   Common/CreateAnimMesh.cpp
   Common/simd.h
   Common/simd.cpp
+  Assimp_Ext.cpp
 )
 SOURCE_GROUP(Common FILES ${Common_SRCS})
 

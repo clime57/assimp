@@ -107,7 +107,7 @@ protected:
     /** Imports the given file into the given scene structure.
      * See BaseImporter::InternReadFile() for details
      */
-    void InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler) override;
+    void InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) override;
 
     /** Recursively constructs a scene node for the given parser node and returns it. */
     aiNode* BuildHierarchy( const ColladaParser& pParser, const Collada::Node* pNode);

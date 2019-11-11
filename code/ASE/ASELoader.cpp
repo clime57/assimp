@@ -134,7 +134,7 @@ void ASEImporter::SetupProperties(const Importer* pImp) {
 // ------------------------------------------------------------------------------------------------
 // Imports the given file into the given scene structure.
 void ASEImporter::InternReadFile( const std::string& pFile,
-    aiScene* pScene, IOSystem* pIOHandler) {
+    aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     std::unique_ptr<IOStream> file( pIOHandler->Open( pFile, "rb"));
 
     // Check whether we can read from the file

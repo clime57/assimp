@@ -679,7 +679,7 @@ void glTFImporter::ImportEmbeddedTextures(glTF::Asset& r)
     }
 }
 
-void glTFImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler)
+void glTFImporter::InternReadFile(const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback)
 {
     // clean all member arrays
     meshOffsets.clear();

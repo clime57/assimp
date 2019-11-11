@@ -180,7 +180,7 @@ const aiImporterDesc* Q3BSPFileImporter::GetInfo () const {
 
 // ------------------------------------------------------------------------------------------------
 //  Import method.
-void Q3BSPFileImporter::InternReadFile(const std::string &rFile, aiScene* scene, IOSystem* ioHandler) {
+void Q3BSPFileImporter::InternReadFile(const std::string &rFile, aiScene* scene, IOSystem* ioHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
     ZipArchiveIOSystem Archive( ioHandler, rFile );
     if ( !Archive.isOpen() ) {
         throw DeadlyImportError( "Failed to open file " + rFile + "." );

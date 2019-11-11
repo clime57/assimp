@@ -78,7 +78,7 @@ public:
 
 protected:
     const aiImporterDesc* GetInfo () const;
-    void InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler);
+    void InternReadFile( const std::string& pFile, aiScene* pScene, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback);
     void SetupProperties(const Importer* pImp);
 
 private:

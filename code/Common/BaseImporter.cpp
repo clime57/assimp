@@ -92,7 +92,7 @@ void BaseImporter::UpdateImporterScale( Importer* pImp )
 
 // ------------------------------------------------------------------------------------------------
 // Imports the given file and returns the imported data.
-aiScene* BaseImporter::ReadFile(Importer* pImp, const std::string& pFile, IOSystem* pIOHandler) {
+aiScene* BaseImporter::ReadFile(Importer* pImp, const std::string& pFile, IOSystem* pIOHandler, DataCallback dataCallback, ExistsCallback existsCallback, ProgressCallback progressCallback) {
 
 
     m_progress = pImp->GetProgressHandler();
@@ -114,7 +114,7 @@ aiScene* BaseImporter::ReadFile(Importer* pImp, const std::string& pFile, IOSyst
     // dispatch importing
     try
     {
-        InternReadFile( pFile, sc.get(), &filter);
+        InternReadFile( pFile, sc.get(), &filter, dataCallback, existsCallback, progressCallback);
 
         // Calculate import scale hook - required because pImp not available anywhere else
         // passes scale into ScaleProcess
@@ -634,7 +634,7 @@ void BatchLoader::LoadAll()
             ASSIMP_LOG_INFO("%%% BEGIN EXTERNAL FILE %%%");
             ASSIMP_LOG_INFO_F("File: ", (*it).file);
         }
-        m_data->pImporter->ReadFile((*it).file,pp);
+        m_data->pImporter->ReadFile((*it).file,pp,nullptr,nullptr,nullptr);
         (*it).scene = m_data->pImporter->GetOrphanedScene();
         (*it).loaded = true;
 

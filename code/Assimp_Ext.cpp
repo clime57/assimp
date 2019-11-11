@@ -13,9 +13,9 @@
 #include <assimp/Exceptional.h>
 #include <assimp/BaseImporter.h>
 
-#include "CInterfaceIOWrapper.h"
-#include "Importer.h"
-#include "ScenePrivate.h"
+#include "CApi/CInterfaceIOWrapper.h"
+#include "Common/Importer.h"
+#include "Common/ScenePrivate.h"
 
 #include <list>
 #include "assimp/cimport.h"
@@ -751,6 +751,204 @@ ASSIMP_API void* aiScene_GetMetadataValue(aiScene* ptrScene, uint uintIndex)
     if (ptrScene->mMetaData)
     {
         return ptrScene->mMetaData->mValues[uintIndex].mData;
+    }
+    return nullptr;
+}
+
+
+ASSIMP_API bool aiMaterial_GetMaterialFloat(aiMaterial* ptrMat, char* key, uint type, uint index, float* floatOut)
+{
+    //aiString aikey;
+
+    //aiReturn r = ptrMat->GetTexture(aiTextureType_HEIGHT, uintType,
+    //    &aiStrPath, uintMapping, uintUvIndex, floatBlend, uintOp,
+    //    uintMapMode);
+
+    aiReturn r = aiGetMaterialFloat(ptrMat, key, type, index, floatOut);
+
+    //memcpy(key, aikey.C_Str(), aikey.length);
+    return r == aiReturn_SUCCESS;
+}
+
+ASSIMP_API bool aiMaterial_GetInteger(aiMaterial* ptrMat, char* key, uint type, uint index, int* intOut)
+{
+    aiReturn r = aiGetMaterialInteger(ptrMat, key, type, index, intOut);
+    return r == aiReturn_SUCCESS;
+}
+
+ASSIMP_API bool aiMaterial_GetString(aiMaterial* ptrMat, char* key, uint type, uint index, const char* strOut)
+{
+    aiString pOut;
+    aiReturn r = aiGetMaterialString(ptrMat, key, type, index, &pOut);
+    strOut = pOut.C_Str();
+    return r == aiReturn_SUCCESS;
+}
+
+ASSIMP_API uint aiMaterial_GetNumProperties(aiMaterial* ptrMat)
+{
+    if (ptrMat)
+    {
+        return ptrMat->mNumProperties;
+    }
+    return 0;
+}
+
+ASSIMP_API aiMaterialProperty* aiMaterial_GetProperty(aiMaterial* ptrMat,uint uintIndex)
+{
+    if (ptrMat)
+    {
+        return ptrMat->mProperties[uintIndex];
+    }
+    return 0;
+}
+
+ASSIMP_API const char* aiMaterialProperty_GetKey(aiMaterialProperty* ptrMatProp)
+{
+    if (ptrMatProp)
+    {
+        return ptrMatProp->mKey.C_Str();
+    }
+    return 0;
+}
+
+ASSIMP_API aiPropertyTypeInfo aiMaterialProperty_GetType(aiMaterialProperty* ptrMatProp)
+{
+    if (ptrMatProp)
+    {
+        return ptrMatProp->mType;
+    }
+    return aiPTI_Float;
+}
+
+ASSIMP_API uint aiMaterialProperty_GetIndex(aiMaterialProperty* ptrMatProp)
+{
+    if (ptrMatProp)
+    {
+        return ptrMatProp->mIndex;
+    }
+    return 0;
+}
+
+ASSIMP_API uint aiMaterialProperty_GetDataSize(aiMaterialProperty* ptrMatProp)
+{
+    if (ptrMatProp)
+    {
+        return ptrMatProp->mDataLength;
+    }
+    return 0;
+}
+
+ASSIMP_API char* aiMaterialProperty_GetDataPointer(aiMaterialProperty* ptrMatProp)
+{
+    if (ptrMatProp)
+    {
+        return ptrMatProp->mData;
+    }
+    return 0;
+}
+
+ASSIMP_API uint aiMaterialProperty_GetSemantic(aiMaterialProperty* ptrMatProp)
+{
+    if (ptrMatProp)
+    {
+        return ptrMatProp->mSemantic;
+    }
+    return 0;
+}
+
+ASSIMP_API bool aiMaterial_HasTextureOcclusion(aiMaterial* ptrMat, uint uintIndex)
+{
+    if (ptrMat)
+    {
+        return ptrMat->GetTextureCount(aiTextureType_AMBIENT_OCCLUSION) > 0;
+    }
+    return false;
+}
+
+ASSIMP_API bool aiMaterial_GetTextureOcclusion(aiMaterial* ptrMat, uint uintType,
+    char* strPath, aiTextureMapping* uintMapping, uint* uintUvIndex, ai_real* floatBlend, aiTextureOp* uintOp,
+    aiTextureMapMode* uintMapMode)
+{
+    aiString aiStrPath;
+    aiReturn r = ptrMat->GetTexture(aiTextureType_AMBIENT_OCCLUSION, uintType,
+        &aiStrPath, uintMapping, uintUvIndex, floatBlend, uintOp,
+        uintMapMode);
+    memcpy(strPath, aiStrPath.C_Str(), aiStrPath.length);
+    return  r == aiReturn_SUCCESS;
+}
+
+ASSIMP_API uint aiMaterial_GetNumTextureOcclusion(aiMaterial* ptrMat)
+{
+    if (ptrMat)
+    {
+        ptrMat->GetTextureCount(aiTextureType_AMBIENT_OCCLUSION);
+    }
+    return 0;
+}
+
+
+ASSIMP_API bool aiMaterial_HasTextureMetallic(aiMaterial* ptrMat, uint uintIndex)
+{
+    if (ptrMat)
+    {
+        return ptrMat->GetTextureCount(aiTextureType_METALNESS) > 0;
+    }
+    return false;
+}
+
+ASSIMP_API bool aiMaterial_GetTextureMetallic(aiMaterial* ptrMat, uint uintType,
+    char* strPath, aiTextureMapping* uintMapping, uint* uintUvIndex, ai_real* floatBlend, aiTextureOp* uintOp,
+    aiTextureMapMode* uintMapMode)
+{
+    aiString aiStrPath;
+    aiReturn r = ptrMat->GetTexture(aiTextureType_METALNESS, uintType,
+        &aiStrPath, uintMapping, uintUvIndex, floatBlend, uintOp,
+        uintMapMode);
+    memcpy(strPath, aiStrPath.C_Str(), aiStrPath.length);
+    return  r == aiReturn_SUCCESS;
+}
+
+ASSIMP_API uint aiMaterial_GetNumTextureMetallic(aiMaterial* ptrMat)
+{
+    if (ptrMat)
+    {
+        ptrMat->GetTextureCount(aiTextureType_METALNESS);
+    }
+    return 0;
+}
+
+ASSIMP_API uint aiNode_GetMetadataCount(aiNode* ptrNode)
+{
+    if (ptrNode)
+    {
+        ptrNode->mMetaData != nullptr ? 1 : 0;
+    }
+    return 0;
+}
+
+ASSIMP_API const char* aiNode_GetMetadataKey(aiNode* ptrNode,uint uintIndex)
+{
+    if (ptrNode &&  ptrNode->mMetaData)
+    {
+        return ptrNode->mMetaData->mKeys[uintIndex].C_Str();
+    }
+    return nullptr;
+}
+
+ASSIMP_API aiMetadataType aiNode_GetMetadataType(aiNode* ptrNode, uint uintIndex)
+{
+    if (ptrNode &&  ptrNode->mMetaData)
+    {
+        return ptrNode->mMetaData->mValues[uintIndex].mType;
+    }
+    return AI_BOOL;
+}
+
+ASSIMP_API void* aiNode_GetMetadataValue(aiNode* ptrNode, uint uintIndex)
+{
+    if (ptrNode &&  ptrNode->mMetaData)
+    {
+        return ptrNode->mMetaData->mValues[uintIndex].mData;
     }
     return nullptr;
 }
