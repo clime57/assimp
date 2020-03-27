@@ -134,7 +134,7 @@ ASSIMP_API const char* aiMaterial_GetEmbeddedTextureName(aiTexture* ptrTexture)
 }
 ASSIMP_API void aiMaterial_ReleaseEmbeddedTexture(aiTexture* ptrTexture)
 {
-    delete ptrTexture;
+    //if (ptrTexture)ptrTexture->release();
 }
 ASSIMP_API bool aiMaterial_IsEmbeddedTextureCompressed(aiTexture* ptrTexture)
 {
@@ -142,7 +142,11 @@ ASSIMP_API bool aiMaterial_IsEmbeddedTextureCompressed(aiTexture* ptrTexture)
 }
 ASSIMP_API uint aiMaterial_GetEmbeddedTextureDataSize(aiTexture* ptrTexture)
 {
-    return ptrTexture->mHeight * ptrTexture->mHeight;
+    if (ptrTexture->mHeight == 0)
+    {
+        return ptrTexture->mWidth;
+    }
+    return ptrTexture->mWidth * ptrTexture->mHeight;
 }
 ASSIMP_API aiTexel* aiMaterial_GetEmbeddedTextureDataPointer(aiTexture* ptrTexture)
 {
@@ -303,7 +307,7 @@ ASSIMP_API bool aiMaterial_GetEmissive(aiMaterial* ptrMat, aiColor4D* colorOut)
 ASSIMP_API bool aiMaterial_HasName(aiMaterial* ptrMat)
 {
     aiString name;
-    return ptrMat->Get(AI_MATKEY_NAME, name);
+    return ptrMat->Get(AI_MATKEY_NAME, name) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetName(aiMaterial* ptrMat, char* nameOut)
 {
@@ -313,45 +317,45 @@ ASSIMP_API bool aiMaterial_GetName(aiMaterial* ptrMat, char* nameOut)
     {
         memcpy(nameOut, name.C_Str(), name.length);
     }
-    return r;
+    return r == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasBumpScaling(aiMaterial* ptrMat)
 {
     float bumpScaling = 0;
-    return ptrMat->Get(AI_MATKEY_BUMPSCALING, bumpScaling);
+    return ptrMat->Get(AI_MATKEY_BUMPSCALING, bumpScaling) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetBumpScaling(aiMaterial* ptrMat, float* floatOut)
 {
     aiReturn r = ptrMat->Get(AI_MATKEY_BUMPSCALING, floatOut);
-    return r;
+    return r == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasShininess(aiMaterial* ptrMat)
 {
     float floatOut = 0;
-    return ptrMat->Get(AI_MATKEY_SHININESS, floatOut);
+    return ptrMat->Get(AI_MATKEY_SHININESS, floatOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetShininess(aiMaterial* ptrMat, float* floatOut)
 {
-    return ptrMat->Get(AI_MATKEY_SHININESS, floatOut);
+    return ptrMat->Get(AI_MATKEY_SHININESS, floatOut) == aiReturn_SUCCESS;
 }
 
 ASSIMP_API bool aiMaterial_HasShininessStrength(aiMaterial* ptrMat)
 {
     float floatOut = 0;
-    return ptrMat->Get(AI_MATKEY_SHININESS_STRENGTH, floatOut);
+    return ptrMat->Get(AI_MATKEY_SHININESS_STRENGTH, floatOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetShininessStrength(aiMaterial* ptrMat, float* floatOut)
 {
-    return ptrMat->Get(AI_MATKEY_SHININESS_STRENGTH, floatOut);
+    return ptrMat->Get(AI_MATKEY_SHININESS_STRENGTH, floatOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_HasOpacity(aiMaterial* ptrMat)
 {
     float floatOut = 0;
-    return ptrMat->Get(AI_MATKEY_OPACITY, floatOut);
+    return ptrMat->Get(AI_MATKEY_OPACITY, floatOut) == aiReturn_SUCCESS;
 }
 ASSIMP_API bool aiMaterial_GetOpacity(aiMaterial* ptrMat, float* floatOut)
 {
-    return ptrMat->Get(AI_MATKEY_OPACITY, floatOut);
+    return ptrMat->Get(AI_MATKEY_OPACITY, floatOut) == aiReturn_SUCCESS;
 }
 
 ASSIMP_API aiAnimMesh* aiMesh_GetAnimMesh(aiMesh* ptrMesh, uint uintIndex)
