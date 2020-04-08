@@ -324,7 +324,7 @@ ASSIMP_API bool aiMaterial_HasBumpScaling(aiMaterial* ptrMat)
     float bumpScaling = 0;
     return ptrMat->Get(AI_MATKEY_BUMPSCALING, bumpScaling) == aiReturn_SUCCESS;
 }
-ASSIMP_API bool aiMaterial_GetBumpScaling(aiMaterial* ptrMat, float* floatOut)
+ASSIMP_API bool aiMaterial_GetBumpScaling(aiMaterial* ptrMat, float& floatOut)
 {
     aiReturn r = ptrMat->Get(AI_MATKEY_BUMPSCALING, floatOut);
     return r == aiReturn_SUCCESS;
@@ -334,7 +334,7 @@ ASSIMP_API bool aiMaterial_HasShininess(aiMaterial* ptrMat)
     float floatOut = 0;
     return ptrMat->Get(AI_MATKEY_SHININESS, floatOut) == aiReturn_SUCCESS;
 }
-ASSIMP_API bool aiMaterial_GetShininess(aiMaterial* ptrMat, float* floatOut)
+ASSIMP_API bool aiMaterial_GetShininess(aiMaterial* ptrMat, float& floatOut)
 {
     return ptrMat->Get(AI_MATKEY_SHININESS, floatOut) == aiReturn_SUCCESS;
 }
@@ -344,7 +344,7 @@ ASSIMP_API bool aiMaterial_HasShininessStrength(aiMaterial* ptrMat)
     float floatOut = 0;
     return ptrMat->Get(AI_MATKEY_SHININESS_STRENGTH, floatOut) == aiReturn_SUCCESS;
 }
-ASSIMP_API bool aiMaterial_GetShininessStrength(aiMaterial* ptrMat, float* floatOut)
+ASSIMP_API bool aiMaterial_GetShininessStrength(aiMaterial* ptrMat, float& floatOut)
 {
     return ptrMat->Get(AI_MATKEY_SHININESS_STRENGTH, floatOut) == aiReturn_SUCCESS;
 }
@@ -353,7 +353,7 @@ ASSIMP_API bool aiMaterial_HasOpacity(aiMaterial* ptrMat)
     float floatOut = 0;
     return ptrMat->Get(AI_MATKEY_OPACITY, floatOut) == aiReturn_SUCCESS;
 }
-ASSIMP_API bool aiMaterial_GetOpacity(aiMaterial* ptrMat, float* floatOut)
+ASSIMP_API bool aiMaterial_GetOpacity(aiMaterial* ptrMat, float& floatOut)
 {
     return ptrMat->Get(AI_MATKEY_OPACITY, floatOut) == aiReturn_SUCCESS;
 }
