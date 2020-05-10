@@ -351,7 +351,11 @@ ASSIMP_API bool aiMaterial_GetShininessStrength(aiMaterial* ptrMat, float& float
 ASSIMP_API bool aiMaterial_HasOpacity(aiMaterial* ptrMat)
 {
     float floatOut = 0;
-    return ptrMat->Get(AI_MATKEY_OPACITY, floatOut) == aiReturn_SUCCESS;
+    if (ptrMat->Get(AI_MATKEY_OPACITY, floatOut) == aiReturn_SUCCESS)
+    {
+        return floatOut != 1;
+    }
+    return false;
 }
 ASSIMP_API bool aiMaterial_GetOpacity(aiMaterial* ptrMat, float& floatOut)
 {
@@ -885,7 +889,7 @@ ASSIMP_API uint aiMaterial_GetNumTextureOcclusion(aiMaterial* ptrMat)
 {
     if (ptrMat)
     {
-        ptrMat->GetTextureCount(aiTextureType_AMBIENT_OCCLUSION);
+        return ptrMat->GetTextureCount(aiTextureType_AMBIENT_OCCLUSION);
     }
     return 0;
 }
@@ -916,7 +920,7 @@ ASSIMP_API uint aiMaterial_GetNumTextureMetallic(aiMaterial* ptrMat)
 {
     if (ptrMat)
     {
-        ptrMat->GetTextureCount(aiTextureType_METALNESS);
+        return ptrMat->GetTextureCount(aiTextureType_METALNESS);
     }
     return 0;
 }
@@ -925,7 +929,7 @@ ASSIMP_API uint aiNode_GetMetadataCount(aiNode* ptrNode)
 {
     if (ptrNode)
     {
-        ptrNode->mMetaData != nullptr ? 1 : 0;
+        return ptrNode->mMetaData != nullptr ? 1 : 0;
     }
     return 0;
 }
